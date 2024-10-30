@@ -1,0 +1,54 @@
+{
+	"states": ["0", "1", "2", "3", "4"],
+    "actions": ["no_op", "mov_down", "mov_left", "mov_right", "mov_up"],
+    "table": [
+        {"state": "0", 
+         "action": "no_op",
+         "transitions": [
+            {
+                "cond": "true",
+                "to": "1"
+            }
+         ]
+        },
+        {"state": "1",
+         "action": "mov_right",
+         "transitions": [
+            {
+                "cond": "true",
+                "to": "2"
+            }
+         ]
+        },
+
+        {"state": "2", 
+         "action": "mov_down",
+         "transitions": [
+            {
+                "cond": "true",
+                "to": "3"
+            }
+         ]
+        },
+        
+        {"state": "3", 
+         "action": "mov_left",
+         "transitions": [
+            {
+                "cond": "true",
+                "to": "4"
+            }
+         ]
+        },
+        
+        {"state": "4", 
+        "action": "mov_up",
+        "transitions": [
+           {
+               "cond": "true",
+               "to": "1"
+           }
+        ]
+       }
+    ]
+}
