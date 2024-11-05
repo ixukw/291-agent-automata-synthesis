@@ -1,5 +1,5 @@
 {
-    "actions": {"no_op" : [0,0], "mov_down": [1, 0], "mov_left": [0, -1], "mov_right" : [0, -1], "mov_up": [-1, 0]},
+    "actions": {"no_op" : [0,0], "mov_down": [1, 0], "mov_left": [0, -1], "mov_right" : [0, 1], "mov_up": [-1, 0]},
     "states": 
     {
         "0": {
