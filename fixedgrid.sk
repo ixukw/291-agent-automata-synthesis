@@ -1,0 +1,87 @@
+include "../string.skh";
+
+int N = 5; // final grid size
+int true_action1_x = 1;
+int true_action1_y = 0;
+
+harness void main() {
+  /*int[N][N] grid;
+  for (int i=0; i<N; i++) {
+    for (int j=0; j<N; j++) {
+      grid[i][j] = 0;
+    }
+  }
+  for (int i=0; i<N; i++) {
+    for (int j=0; j<N; j++) {
+      assert grid[i][j] == 0;
+    }
+  }*/
+
+  // ask sketch to generate the starting position
+  int posX = ??;
+  int posY = ??;
+  assert posX > 0 && posX < N && posY > 0 && posY < N;
+  int[2] pos = {posX, posY};
+  
+  // get the next position from the true action
+  //int pos_next_x = posX + true_action1_x;
+  //int pos_next_y = posY + true_action1_y;
+  //int[2] pos_next = {pos_next_x, pos_next_y};
+  int[2] pos_next = true_transition(pos, {true_action1_x, true_action1_y});
+
+  // ask sketch to find the action that maps pos to pos_next
+  int[2] action = transition(pos, pos_next);
+  assert action[0] >= -1 && action[0] <= 1;
+  assert action[1] >= -1 && action[1] <= 1;
+
+  // the synthesized_action should match the true action
+  assert action[0] == true_action1_x && action[1] == true_action1_y;
+
+  println(newStr("ACTION"));
+  println(newStr({action[0], '\0'}));
+  println(newStr({action[1], '\0'}));
+  println(newStr("pos"));
+  println(newStr({pos[0], '\0'}));
+  println(newStr({pos[1], '\0'}));
+  println(newStr("pos_next"));
+  println(newStr({pos_next[0], '\0'}));
+  println(newStr({pos_next[1], '\0'}));
+}
+
+int[2] true_transition(int[2] pos, int[2] action) {
+  // get the next position from the true action
+  int pos_next_x = pos[0] + action[0];
+  int pos_next_y = pos[1] + action[1];
+  int[2] pos_next = {pos_next_x, pos_next_y};
+  return pos_next;
+}
+
+/* single step transition
+ * input is the position at time t and t+1
+ * output is the transition action (dx, dy)
+ */ 
+ int[2] transition(int[2] pos_now, int[2] pos_next) {
+    int[2] action;
+    assume pos_now[0] < N && pos_now[0] >= 0;
+    assume pos_now[1] < N && pos_now[1] >= 0;
+
+    int dx = ??;
+    assert dx >= -1 && dx <= 1 && pos_now[0] + dx < N && pos_now[1]+dx >=0;
+    int dy = ??;
+    assert dy >= -1 && dy <= 1 && pos_now[0] + dy < N && pos_now[1]+dy >=0;
+    minimize(dx);
+    minimize(dy);
+    println(newStr({dx, '\0'}));
+    println(newStr({dy, '\0'}));
+    action = {dx, dy};
+    assert action[0] >= -1 && action[0] <= 1 && action[1] >= -1 && action[1] <= 1;
+    int[2] pos_try = try_transition(pos_now, action);
+    assert pos_try[0] == pos_next[0];
+    assert pos_try[1] == pos_next[1];
+    
+    return action;
+}
+
+int[2] try_transition(int[2] pos_now, int[2] action) implements true_transition {
+  return {pos_now[0]+action[0], pos_now[1]+action[1]};
+}

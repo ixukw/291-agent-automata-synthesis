@@ -15,105 +15,105 @@ Grid* Grid::create(T_0* grid_, int grid_len){
   return rv;
 }
 void main__Wrapper() {
-  bool _tt0[3] = {0, 0, 0};
-  int*  pos__ANONYMOUS_s11= new int [2 * 3]; CopyArr<int >(pos__ANONYMOUS_s11,_tt0, 2 * 3, 3);
-  glblInit_pos__ANONYMOUS_s19(pos__ANONYMOUS_s11);
-  Grid*  g__ANONYMOUS_s13=NULL;
-  glblInit_g__ANONYMOUS_s17(g__ANONYMOUS_s13);
-  bool _tt1[3] = {0, 0, 0};
-  int*  actions__ANONYMOUS_s12= new int [3]; CopyArr<int >(actions__ANONYMOUS_s12,_tt1, 3, 3);
-  glblInit_actions__ANONYMOUS_s15(actions__ANONYMOUS_s12);
-  _main(actions__ANONYMOUS_s12, g__ANONYMOUS_s13, pos__ANONYMOUS_s11);
-  delete[] pos__ANONYMOUS_s11;
-  delete[] actions__ANONYMOUS_s12;
+  _main();
 }
 void main__WrapperNospec() {}
-void glblInit_actions__ANONYMOUS_s15(int* actions__ANONYMOUS_s14/* len = 3 */) {
-  int _tt2[3] = {0, 2, 1};
-  CopyArr<int >(actions__ANONYMOUS_s14,_tt2, 3, 3);
+void transition__Wrapper(int* grid/* len = 2 * 1 */, int* pos/* len = 2 */, int* true_next_pos/* len = 2 */) {
+  int  _out_s5=0;
+  transition(grid, pos, true_next_pos, _out_s5);
 }
-void glblInit_g__ANONYMOUS_s17(Grid*& g__ANONYMOUS_s16) {
+void transition__WrapperNospec(int* grid/* len = 2 * 1 */, int* pos/* len = 2 */, int* true_next_pos/* len = 2 */) {}
+void _main() {
+  bool _tt0[1] = {0};
+  bool*  __sa7= new bool [2 * 1]; CopyArr<bool >(__sa7,_tt0, 2 * 1, 1);
+  bool _tt1[2] = {1, 0};
+  CopyArr<bool >((__sa7+ 0),_tt1, 2, 2);
+  bool _tt2[3] = {0, 0, 0};
+  bool*  __sa6= new bool [(2 * 1) * 3]; CopyArr<bool >(__sa6,_tt2, (2 * 1) * 3, 3);
+  CopyArr<bool >((__sa6+ 0),__sa7, 2, 2 * 1);
   bool _tt3[1] = {0};
-  bool*  __sa21= new bool [2 * 1]; CopyArr<bool >(__sa21,_tt3, 2 * 1, 1);
-  bool _tt4[2] = {1, 0};
-  CopyArr<bool >((__sa21+ 0),_tt4, 2, 2);
-  bool _tt5[3] = {0, 0, 0};
-  bool*  __sa20= new bool [(2 * 1) * 3]; CopyArr<bool >(__sa20,_tt5, (2 * 1) * 3, 3);
-  CopyArr<bool >((__sa20+ 0),__sa21, 2, 2 * 1);
-  bool _tt6[1] = {0};
-  bool*  __sa22= new bool [2 * 1]; CopyArr<bool >(__sa22,_tt6, 2 * 1, 1);
-  bool _tt7[2] = {0, 1};
-  CopyArr<bool >((__sa22+ 0),_tt7, 2, 2);
-  CopyArr<bool >((__sa20+ 2),__sa22, 2, 2 * 1);
-  bool _tt8[1] = {0};
-  bool*  __sa23= new bool [2 * 1]; CopyArr<bool >(__sa23,_tt8, 2 * 1, 1);
-  bool _tt9[2] = {1, 0};
-  CopyArr<bool >((__sa23+ 0),_tt9, 2, 2);
-  CopyArr<bool >((__sa20+ 4),__sa23, 2, 2 * 1);
-  g__ANONYMOUS_s16 = Grid::create(__sa20, (2 * 1) * 3);
-  delete[] __sa21;
-  delete[] __sa20;
-  delete[] __sa22;
-  delete[] __sa23;
-}
-void glblInit_pos__ANONYMOUS_s19(int* pos__ANONYMOUS_s18/* len = 2 * 3 */) {
-  bool _tt10[3] = {0, 0, 0};
-  bool*  __sa26= new bool [2 * 3]; CopyArr<bool >(__sa26,_tt10, 2 * 3, 3);
-  bool _tt11[2] = {0, 0};
-  CopyArr<bool >((__sa26+ 0),_tt11, 2, 2);
-  bool _tt12[2] = {0, 1};
-  CopyArr<bool >((__sa26+ 2),_tt12, 2, 2);
-  bool _tt13[2] = {1, 0};
-  CopyArr<bool >((__sa26+ 4),_tt13, 2, 2);
-  for (int  __sa24=0;(__sa24) < (3);__sa24 = __sa24 + 1){
-    assert (((__sa24) >= (0)) && ((__sa24) < (3)));;
-    assert (((__sa24) >= (0)) && ((__sa24) < (3)));;
-    CopyArr<int >((pos__ANONYMOUS_s18+ 2 * __sa24),(__sa26+ 2 * __sa24), 2, 2);
+  bool*  __sa8= new bool [2 * 1]; CopyArr<bool >(__sa8,_tt3, 2 * 1, 1);
+  bool _tt4[2] = {0, 1};
+  CopyArr<bool >((__sa8+ 0),_tt4, 2, 2);
+  CopyArr<bool >((__sa6+ 2),__sa8, 2, 2 * 1);
+  bool _tt5[1] = {0};
+  bool*  __sa9= new bool [2 * 1]; CopyArr<bool >(__sa9,_tt5, 2 * 1, 1);
+  bool _tt6[2] = {1, 0};
+  CopyArr<bool >((__sa9+ 0),_tt6, 2, 2);
+  CopyArr<bool >((__sa6+ 4),__sa9, 2, 2 * 1);
+  Grid*  g=NULL;
+  g = Grid::create(__sa6, (2 * 1) * 3);
+  bool _tt7[3] = {0, 0, 0};
+  bool*  __sa12= new bool [2 * 3]; CopyArr<bool >(__sa12,_tt7, 2 * 3, 3);
+  bool _tt8[2] = {1, 0};
+  CopyArr<bool >((__sa12+ 0),_tt8, 2, 2);
+  bool _tt9[2] = {0, 1};
+  CopyArr<bool >((__sa12+ 2),_tt9, 2, 2);
+  bool _tt10[2] = {1, 0};
+  CopyArr<bool >((__sa12+ 4),_tt10, 2, 2);
+  bool _tt11[3] = {0, 0, 0};
+  int*  pos= new int [2 * 3]; CopyArr<int >(pos,_tt11, 2 * 3, 3);
+  for (int  __sa10=0;(__sa10) < (3);__sa10 = __sa10 + 1){
+    assert (((__sa10) >= (0)) && ((__sa10) < (3)));;
+    assert (((__sa10) >= (0)) && ((__sa10) < (3)));;
+    CopyArr<int >((pos+ 2 * __sa10),(__sa12+ 2 * __sa10), 2, 2);
   }
-  delete[] __sa26;
+  int _tt12[3] = {0, 2, 1};
+  int*  actions= new int [3]; CopyArr<int >(actions,_tt12, 3, 3);
+  check_all(g->grid, pos, actions);
+  delete[] __sa7;
+  delete[] __sa6;
+  delete[] __sa8;
+  delete[] __sa9;
+  delete[] __sa12;
+  delete[] pos;
+  delete[] actions;
 }
-void _main(int* actions__ANONYMOUS_s4/* len = 3 */, Grid*& g__ANONYMOUS_s5, int* pos__ANONYMOUS_s6/* len = 2 * 3 */) {
-  int*  actions__ANONYMOUS_s7_s83= new int [3]; CopyArr<int >(actions__ANONYMOUS_s7_s83,actions__ANONYMOUS_s4, 3, 3);
-  int*  pos__ANONYMOUS_s8_s84= new int [2 * 3]; CopyArr<int >(pos__ANONYMOUS_s8_s84,pos__ANONYMOUS_s6, 2 * 3, 2 * 3);
-  check_all(g__ANONYMOUS_s5->grid, pos__ANONYMOUS_s6, actions__ANONYMOUS_s4, actions__ANONYMOUS_s7_s83, pos__ANONYMOUS_s8_s84);
-  CopyArr<int >(actions__ANONYMOUS_s4,actions__ANONYMOUS_s7_s83, 3, 3);
-  CopyArr<int >(pos__ANONYMOUS_s6,pos__ANONYMOUS_s8_s84, 2 * 3, 2 * 3);
-  delete[] actions__ANONYMOUS_s7_s83;
-  delete[] pos__ANONYMOUS_s8_s84;
-}
-void check_all(int* grids/* len = (2 * 1) * 3 */, int* pos/* len = 2 * 3 */, int* actions/* len = 3 */, int* actions__ANONYMOUS_s7/* len = 3 */, int* pos__ANONYMOUS_s8/* len = 2 * 3 */) {
-  for (int  i=1;(i) < (3);i = i + 1){
-    assert (((i) >= (0)) && ((i) < (3)));;
-    assert ((((i - 1)) >= (0)) && (((i - 1)) < (3)));;
-    assert (((i) >= (0)) && ((i) < (3)));;
-    check((grids+ 2 * i), (pos+ 2 * (i - 1)), (pos+ 2 * i), (actions[i]), pos__ANONYMOUS_s8);
+void transition(int* grid/* len = 2 * 1 */, int* pos/* len = 2 */, int* true_next_pos/* len = 2 */, int& _out) {
+  if(!(1)){ throw AssumptionFailedException();  };
+  if(!(1)){ throw AssumptionFailedException();  };
+  _out = 2;
+  if(!(1)){ throw AssumptionFailedException();  };
+  if(!(1)){ throw AssumptionFailedException();  };
+  for (int  i=0;(i) < (1);i = i + 1){
+    for (int  j=0;(j) < (2);j = j + 1){
+      assert (((i) >= (0)) && ((i) < (1)));;
+      assert (((j) >= (0)) && ((j) < (2)));;
+      if(!(((grid[((2 * i) + j)])) <= (1))){ throw AssumptionFailedException();  };
+      assert (((i) >= (0)) && ((i) < (1)));;
+      assert (((j) >= (0)) && ((j) < (2)));;
+      assert (((grid[((2 * i) + j)])) <= (1));;
+    }
   }
-}
-void check(int* grid/* len = 2 * 1 */, int* pos/* len = 2 */, int* next_pos/* len = 2 */, int true_action, int* pos__ANONYMOUS_s10/* len = 2 * 3 */) {
-  int  synthesized_action_s1=0;
-  transition(grid, pos, next_pos, synthesized_action_s1, pos__ANONYMOUS_s10);
-}
-void transition(int* grid/* len = 2 * 1 */, int* pos/* len = 2 */, int* true_next_pos/* len = 2 */, int& _out, int* pos__ANONYMOUS_s9/* len = 2 * 3 */) {
-  _out = 0;
-  bool _tt14[2] = {0, 0};
-  int*  change_s3= new int [2]; CopyArr<int >(change_s3,_tt14, 2, 2);
-  action_map(0, change_s3);
+  bool _tt13[2] = {0, 0};
+  int*  change_s3= new int [2]; CopyArr<int >(change_s3,_tt13, 2, 2);
+  action_map(2, change_s3);
+  assert (((change_s3[0])) <= (1));;
+  assert (((change_s3[1])) <= (1));;
   delete[] change_s3;
   return;
 }
+void check_all(int* grids/* len = (2 * 1) * 3 */, int* pos/* len = 2 * 3 */, int* actions/* len = 3 */) {
+  check((grids+ 2), (pos+ 0), (pos+ 2), (actions[1]));
+}
 void action_map(int action, int* _out/* len = 2 */) {
-  bool _tt15[2] = {0, 0};
-  CopyArr<int >(_out,_tt15, 2, 2);
+  bool _tt14[2] = {0, 0};
+  CopyArr<int >(_out,_tt14, 2, 2);
   if ((action) == (1)) {
-    (_out[0]) = 0;
-    (_out[1]) = -1;
+    int _tt15[2] = {0, -1};
+    CopyArr<int >(_out,_tt15, 2, 2);
   } else {
     if ((action) == (2)) {
-      (_out[0]) = 0;
-      (_out[1]) = 1;
+      bool _tt16[2] = {0, 1};
+      CopyArr<int >(_out,_tt16, 2, 2);
     }
   }
   return;
+}
+void check(int* grid/* len = 2 * 1 */, int* pos/* len = 2 */, int* next_pos/* len = 2 */, int true_action) {
+  int  synthesized_action_s1=0;
+  transition(grid, pos, next_pos, synthesized_action_s1);
+  assert ((synthesized_action_s1) == (true_action));;
 }
 
 }
