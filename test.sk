@@ -37,6 +37,12 @@ harness int transition(int[n][m] grid, int[2] pos, int[2] true_next_pos) {
   int action = ??;
   assume action > 0;
   assume action < 3;
+  for (int i=0; i<m; i++) {
+    for (int j=0; j<n; j++) {
+      assume grid[i][j] <= 1;
+      assert grid[i][j] <= 1;
+    }
+  }
 /*
   if (??) {
     action = 1; //moveLeft(pos)
@@ -45,9 +51,11 @@ harness int transition(int[n][m] grid, int[2] pos, int[2] true_next_pos) {
     action = 2; //moveRight(pos)
   }*/
   int[2] change = action_map(action);
-  int[2] next_pos = {pos[0] + change[0], pos[1]+change[1]};
+  assert change[0] <= 1;
+  assert change[1] <= 1;
+  int[2] next_pos = {pos[0]+change[0], pos[1]+change[1]};
   for (int i=0; i<2; i++) {
-    assert(next_pos[i] == true_next_pos[i]);
+    //assert(next_pos[i] == true_next_pos[i]);
   }
 
   return action;
@@ -55,7 +63,7 @@ harness int transition(int[n][m] grid, int[2] pos, int[2] true_next_pos) {
 
 void check(int[n][m] grid, int[2] pos, int[2] next_pos, int true_action){
   int synthesized_action = transition(grid, pos, next_pos);
-  //assert(synthesized_action == true_action);
+  assert(synthesized_action == true_action);
 }
 
 void check_all(int[n][m][t] grids, int[2][t] pos, int[t] actions) {
