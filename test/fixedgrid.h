@@ -27,12 +27,12 @@ extern void newStr(int n, char* w/* len = n */, Str*& _out);
 extern void println(Str* s);
 }
 namespace ANONYMOUS{
-extern void try_transition(int* pos_now/* len = 2 */, int* action/* len = 2 */, int* _out/* len = 2 */);
-extern void true_transition(int* pos/* len = 2 */, int* action/* len = 2 */, int* _out/* len = 2 */);
 extern void main__Wrapper();
 extern void main__WrapperNospec();
 extern void _main();
+extern void true_transition(int* pos/* len = 2 */, int* action/* len = 2 */, int* _out/* len = 2 */);
 extern void transition(int* pos_now/* len = 2 */, int* pos_next/* len = 2 */, int* _out/* len = 2 */);
+extern void try_transition(int* pos_now/* len = 2 */, int* action/* len = 2 */, int* _out/* len = 2 */);
 }
 
 #endif

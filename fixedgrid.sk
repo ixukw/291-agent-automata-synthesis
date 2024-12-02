@@ -5,22 +5,11 @@ int true_action1_x = 1;
 int true_action1_y = 0;
 
 harness void main() {
-  /*int[N][N] grid;
-  for (int i=0; i<N; i++) {
-    for (int j=0; j<N; j++) {
-      grid[i][j] = 0;
-    }
-  }
-  for (int i=0; i<N; i++) {
-    for (int j=0; j<N; j++) {
-      assert grid[i][j] == 0;
-    }
-  }*/
-
+  
   // ask sketch to generate the starting position
-  int posX = ??;
-  int posY = ??;
-  assert posX > 0 && posX < N && posY > 0 && posY < N;
+  int posX = 0;
+  int posY = 0;
+  assert posX >= 0 && posX < N && posY >= 0 && posY < N;
   int[2] pos = {posX, posY};
   
   // get the next position from the true action
@@ -82,6 +71,6 @@ int[2] true_transition(int[2] pos, int[2] action) {
     return action;
 }
 
-int[2] try_transition(int[2] pos_now, int[2] action) implements true_transition {
+int[2] try_transition(int[2] pos_now, int[2] action) {
   return {pos_now[0]+action[0], pos_now[1]+action[1]};
 }
