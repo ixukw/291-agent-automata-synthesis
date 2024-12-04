@@ -230,13 +230,14 @@ int move_down(int state, int move){
 
 
 harness void main() {
-	int[t] true_actions = {0,1,2,3,0,3,2,3};
-	int init_state = 0;
-	int init_action = 1;
-	int l = move_left(0, init_action);
-	int r = move_right(1, init_action);
-	int u = move_up(2, init_action);
-	int d = move_down(3, init_action);
+	int[t] true_actions = {0,1,2,3,0,3,2,3};int init_state_l = 1;
+	int init_state_r = 0;
+	int init_state_u = 1;
+	int init_state_d = 1;
+	int l = move_left(init_state_l, init_action);
+	int r = move_right(init_state_r, init_action);
+	int u = move_up(init_state_u, init_action);
+	int d = move_down(init_state_d, init_action);
 	assert (l == 0 && r != 0 && u != 0 && d != 0) || (r == 0 && l != 0 && u != 0 && d != 0) || (u == 0 && l != 0 && r != 0 && d != 0) || (d == 0 && l != 0 && r != 0 && u != 0);
 	int next;
 	if (l == 0) {
@@ -248,9 +249,9 @@ harness void main() {
 	} else if (d == 0) {
 		next = 3;
 	}
-	assert (next == init_action);
+	assert (next == true_action[0]);
 	
-	for (int i=0; i<t; i++) {
+	for (int i=1; i<t; i++) {
 		l = move_left(l, next);
 		r = move_right(r, next);
 		u = move_up(u, next);
