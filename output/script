@@ -4,5 +4,5 @@ then
 echo "You need to set the \$SKETCH_HOME environment variable to be the path to the SKETCH distribution; This is needed to find the SKETCH header files needed to compile your program." >&2;
 exit 1;
 fi
-g++ -I "$SKETCH_HOME/include" -o automata automata.cpp automata_test.cpp
-./automata
+g++ -I "$SKETCH_HOME/include" -o test test.cpp test_test.cpp
+./test
