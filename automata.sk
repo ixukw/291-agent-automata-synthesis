@@ -1,0 +1,93 @@
+// move: 0 = left, 1 = right
+int maxState = 2;
+int t = 6;
+
+int left(int state, int move) {
+  int nextState;
+  if (state == 0) {
+    if (move == 0) {
+      nextState = ??;
+    } else if (move == 1) {
+      nextState = ??;
+    } else {
+      assert (0 == 1);
+    }
+  } else if (state == 1) {
+    if (move == 0) {
+      nextState = ??;
+    } else if (move == 1) {
+      nextState = ??;
+    } else {
+      assert (0 == 1);
+    }
+  } else {
+    assert (0 == 1);
+  }
+  //assert (nextState == 0 || nextState == 1);
+  //minimize(nextState);
+  assert nextState < maxState;
+  return nextState;
+}
+
+int right(int state, int move) {
+  int nextState;
+  if (state == 0) {
+    if (move == 0) {
+      nextState = ??;
+    } else if (move == 1) {
+      nextState = ??;
+    } else {
+      assert (0 == 1);
+    }
+  } else if (state == 1) {
+    if (move == 0) {
+      nextState = ??;
+    } else if (move == 1) {
+      nextState = ??;
+    } else {
+      assert (0 == 1);
+    }
+  } else {
+      assert (0 == 1);
+  }
+  //assert (nextState == 0 || nextState == 1);
+  // minimize(nextState);
+  assert (nextState < maxState);
+  return nextState;
+}
+
+
+harness void main() {
+  int[2] pos1 = {0,0};
+  int[2] pos2 = {0,1};
+  int[t] true_actions = {0,1,0,1,0,1}; // right left left right
+  int init_state = 0;
+  int init_action = 1;
+  
+  //*****************************
+  int l = left(init_state, init_action);
+  int r = right(1, init_action);
+
+  assert (l == 0 && r != 0) || (r == 0 && l != 0);
+  int next;
+  if (l == 0) {
+    next = 0;
+  } else if (r == 0) {
+    next = 1;
+  }
+  assert (next == init_action);
+
+  // true_actions
+  for (int i=0; i<t; i++) {
+    l = left(l, next);
+    r = right(r, next);
+
+    assert (l == 0 && r != 0) || (r == 0 && l != 0);
+    if (l == 0) {
+      next = 0;
+    } else if (r == 0) {
+      next = 1;
+    }
+    assert (next == true_actions[i]);
+  }
+}
