@@ -18,7 +18,7 @@ int left(int state, int move) {
     } else if (move == 1) {
       nextState = ??;
     } else {
-      assert (0 == 1);
+      assert (0);
     }
   } else {
     assert (0 == 1);
@@ -48,7 +48,7 @@ int right(int state, int move) {
       assert (0 == 1);
     }
   } else {
-      assert (0 == 1);
+    assert (0 == 1);
   }
   //assert (nextState == 0 || nextState == 1);
   // minimize(nextState);

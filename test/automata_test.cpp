@@ -3,7 +3,7 @@
 #include <time.h>
 #include <iostream>
 #include "vops.h"
-#include "fixedgrid.h"
+#include "automata.h"
 
 using namespace std;
 
@@ -20,6 +20,6 @@ int main(int argc, char** argv) {
   Parameters p(argc, argv);
   srand(time(0));
   main__Wrapper_ANONYMOUSTest(p);
-  printf("Automated testing passed for fixedgrid\n");
+  printf("Automated testing passed for automata\n");
   return 0;
 }

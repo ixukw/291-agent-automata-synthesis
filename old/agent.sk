@@ -1,0 +1,19 @@
+
+bit[2] state_a = {{1,0},{1,1}};
+
+bit agent(bit[2][2] state) {
+  int sum = 0;
+  for (int i=0; i<2; i++) {
+    int x = ??;
+    assume x >= 0 && x <= 10;
+    sum += state[i] * x;
+  }
+  if (sum > 10) {
+    return 1;
+  }
+  return 0;
+}
+
+void main() {
+  agent(state_a);
+}

@@ -31,7 +31,7 @@ int[2] action_map(int action) { // id 1
   return a;
 }
 
-harness int transition(int[n][m] grid, int[2] pos, int[2] true_next_pos) {
+harness int transition(int[n][m] grid, int action) {
   assume m > 0;
   assume n > 0;
   int action = ??;

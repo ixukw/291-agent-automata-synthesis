@@ -19,7 +19,10 @@ void println(Str s){
 	}	
 }
 
-
+char intAsChar(int x) {
+  char c = x % 10;
+  return c;
+}
 
 
 Str cat(Str s1, Str s2){
