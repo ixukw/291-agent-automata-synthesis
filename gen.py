@@ -56,7 +56,7 @@ def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list
     
     main_code += next_state_code
     #main_code += "\nassert (next == init_action);\n\n"
-    main_code += "\nassert (next == true_action[0]);\n\n"
+    main_code += "\nassert (next == true_actions[0]);\n\n"
 
     # true action 1 to t for loop
     main_code += "for (int i=1; i<t; i++) {\n"

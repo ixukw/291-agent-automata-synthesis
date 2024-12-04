@@ -230,7 +230,9 @@ int move_down(int state, int move){
 
 
 harness void main() {
-	int[t] true_actions = {0,1,2,3,0,3,2,3};int init_state_l = 1;
+	int init_action = 1;
+	int[t] true_actions = {0,1,2,3,0,3,2,3};
+	int init_state_l = 1;
 	int init_state_r = 0;
 	int init_state_u = 1;
 	int init_state_d = 1;
@@ -249,7 +251,7 @@ harness void main() {
 	} else if (d == 0) {
 		next = 3;
 	}
-	assert (next == true_action[0]);
+	assert (next == true_actions[0]);
 	
 	for (int i=1; i<t; i++) {
 		l = move_left(l, next);
