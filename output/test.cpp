@@ -14,7 +14,7 @@ void _main() {
   int _tt0[8] = {0, 1, 2, 3, 0, 3, 2, 3};
   int*  true_actions= new int [8]; CopyArr<int >(true_actions,_tt0, 8, 8);
   int  l_s1=0;
-  move_left(1, 1, l_s1);
+  move_left(2, 1, l_s1);
   int  l=0;
   l = l_s1;
   int  r_s3=0;
@@ -83,23 +83,23 @@ void _main() {
 void move_left(int state, int move, int& _out) {
   if ((state) == (0)) {
     if ((move) == (0)) {
-      _out = 2;
+      _out = 3;
     } else {
       if ((move) == (1)) {
-        _out = 0;
+        _out = 11;
       } else {
         if ((move) == (2)) {
-          _out = 31;
+          _out = 0;
         } else {
           assert ((move) == (3));;
-          _out = 25;
+          _out = 17;
         }
       }
     }
   } else {
     if ((state) == (1)) {
       if ((move) == (0)) {
-        _out = 7;
+        _out = 0;
       } else {
         if ((move) == (1)) {
           _out = 0;
@@ -118,6 +118,22 @@ void move_left(int state, int move, int& _out) {
           _out = 0;
         } else {
           if ((move) == (1)) {
+            _out = 0;
+          } else {
+            if ((move) == (2)) {
+              _out = 0;
+            } else {
+              assert ((move) == (3));;
+              _out = 0;
+            }
+          }
+        }
+      } else {
+        assert ((state) == (3));;
+        if ((move) == (0)) {
+          _out = 0;
+        } else {
+          if ((move) == (1)) {
             _out = 1;
           } else {
             if ((move) == (2)) {
@@ -125,22 +141,6 @@ void move_left(int state, int move, int& _out) {
             } else {
               assert ((move) == (3));;
               _out = 1;
-            }
-          }
-        }
-      } else {
-        assert ((state) == (3));;
-        if ((move) == (0)) {
-          _out = 5;
-        } else {
-          if ((move) == (1)) {
-            _out = 6;
-          } else {
-            if ((move) == (2)) {
-              _out = 0;
-            } else {
-              assert ((move) == (3));;
-              _out = 23;
             }
           }
         }
@@ -201,10 +201,10 @@ void move_right(int state, int move, int& _out) {
       } else {
         assert ((state) == (3));;
         if ((move) == (0)) {
-          _out = 23;
+          _out = 0;
         } else {
           if ((move) == (1)) {
-            _out = 4;
+            _out = 0;
           } else {
             if ((move) == (2)) {
               _out = 0;
@@ -229,7 +229,7 @@ void move_up(int state, int move, int& _out) {
         _out = 0;
       } else {
         if ((move) == (2)) {
-          _out = 2;
+          _out = 1;
         } else {
           assert ((move) == (3));;
           _out = 0;
@@ -248,7 +248,7 @@ void move_up(int state, int move, int& _out) {
             _out = 0;
           } else {
             assert ((move) == (3));;
-            _out = 0;
+            _out = 3;
           }
         }
       }
@@ -264,20 +264,20 @@ void move_up(int state, int move, int& _out) {
               _out = 0;
             } else {
               assert ((move) == (3));;
-              _out = 3;
+              _out = 0;
             }
           }
         }
       } else {
         assert ((state) == (3));;
         if ((move) == (0)) {
-          _out = 3;
+          _out = 2;
         } else {
           if ((move) == (1)) {
             _out = 0;
           } else {
             if ((move) == (2)) {
-              _out = 1;
+              _out = 0;
             } else {
               assert ((move) == (3));;
               _out = 0;
@@ -312,7 +312,7 @@ void move_down(int state, int move, int& _out) {
         _out = 0;
       } else {
         if ((move) == (1)) {
-          _out = 3;
+          _out = 2;
         } else {
           if ((move) == (2)) {
             _out = 0;
@@ -325,7 +325,7 @@ void move_down(int state, int move, int& _out) {
     } else {
       if ((state) == (2)) {
         if ((move) == (0)) {
-          _out = 0;
+          _out = 1;
         } else {
           if ((move) == (1)) {
             _out = 0;
@@ -341,7 +341,7 @@ void move_down(int state, int move, int& _out) {
       } else {
         assert ((state) == (3));;
         if ((move) == (0)) {
-          _out = 1;
+          _out = 0;
         } else {
           if ((move) == (1)) {
             _out = 0;
