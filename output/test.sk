@@ -1,5 +1,5 @@
 int maxState = 4; 
-int t = 8;
+int t = 3;
 int move_left(int state, int move){
 	int nextState;
 	if (state == 0) {
@@ -231,13 +231,11 @@ int move_down(int state, int move){
 
 harness void main() {
 	int init_action = 1;
-	int[t] true_actions = {0,1,2,3,0,3,2,3};
-	int init_state_l = ??;
+	int[t] true_actions = {3,0,2};
+	int init_state_l = 1;
 	int init_state_r = 0;
-	int init_state_u = ??;
-	int init_state_d = ??;
-
-	assert init_state_l != 0 && init_state_u != 0 && init_state_d != 0;
+	int init_state_u = 1;
+	int init_state_d = 1;
 	int l = move_left(init_state_l, init_action);
 	int r = move_right(init_state_r, init_action);
 	int u = move_up(init_state_u, init_action);

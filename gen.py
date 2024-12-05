@@ -1,3 +1,5 @@
+import trace_to_action
+import sys
 
 def header(maxState: int, t: int):
     return f"int maxState = {maxState}; \nint t = {t};"
@@ -68,21 +70,41 @@ def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list
     main_code += "\n\tassert (next == true_actions[i]);\n}"
     return main_code.replace('\n','\n\t') + "\n}"
 
-def main():
-    max_states = 4
-    true_actions = [0,1,2,3,0,3,2,3]
+def from_snapshots(folder_path):
+    return trace_to_action.process_snapshots(folder_path)
+
+def combine(max_states, actions):
+    init_action = actions[0]
+    true_actions = actions[1:]
     time_steps = len(true_actions)
-    
-    # init_state = 0
-    init_action = 1
-    
     possible_moves = ["move_left", "move_right", "move_up", "move_down"]
     possible_moves_vars = 'lrud'
     
     transition_code = gen_transitions(max_states, possible_moves)
     main_code = gen_main_fun(init_action, true_actions, possible_moves, possible_moves_vars)
     
-    print(f"{header(max_states, time_steps)}\n{transition_code}\n{main_code}")
+    return f"{header(max_states, time_steps)}\n{transition_code}\n{main_code}"
+
+def main():
+    args = sys.argv
+    #print(args)
+    if len(args) > 1:
+        actions = from_snapshots(args[1])
+        max_states = int(args[2])
+
+    else:
+        max_states = 4
+        actions = [1,0,1,2,3,0,3,2,3]
+
+    code = combine(max_states, actions)
+    print(code)
+    # possible_moves = ["move_left", "move_right", "move_up", "move_down"]
+    # possible_moves_vars = 'lrud'
+    
+    # transition_code = gen_transitions(max_states, possible_moves)
+    # main_code = gen_main_fun(init_action, true_actions, possible_moves, possible_moves_vars)
+    
+    # print(f"{header(max_states, time_steps)}\n{transition_code}\n{main_code}")
     
 if __name__ == "__main__":
     main()

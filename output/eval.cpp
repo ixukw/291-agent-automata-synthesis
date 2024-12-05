@@ -26,7 +26,7 @@ void enumerate_all(int maxStates, int maxMoves) {
 
 void trace_actions(int actions[], int t, int maxStates, int maxMoves) {
   int move = actions[0];
-  int state[4] = {2,0,1,1};
+  int state[4] = {1,0,1,1};
   std::printf("i: action: #, states: l r u d\n");
   for (int i=0; i<t; i++) {
     int res;
@@ -58,8 +58,9 @@ int main() {
   int maxStates = 4;
   int maxMoves = 4;
 
-  int t = 9;
-  int actions[9] = {1,0,1,2,3,0,3,2,3};
+  int t = 4;
+  // int actions[9] = {1,0,1,2,3,0,3,2,3};
+  int actions[4] = {1,3,0,2};
 
   trace_actions(actions, t, maxStates, maxMoves);
   // enumerate_all(maxStates, maxMoves);
