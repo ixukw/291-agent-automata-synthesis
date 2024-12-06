@@ -7,11 +7,7 @@
 
 void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
   for (int i=0; i<maxStates; i++) {
-    if (i < max_acc[k]) {
       std::printf("%d\n", i);
-    } else {
-      std::printf("%d\n", i);
-    }
     for (int j=0; j<maxMoves; j++) {
       int res;
       ANONYMOUS::move_left(i, j, res);
@@ -27,11 +23,7 @@ void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
   }
   std::printf("move\n\n");
   for (int i=0; i<maxStates; i++) {
-    if (i < max_acc[k]) {
       std::printf("%d\n", i);
-    } else {
-      std::printf("%d\n", i);
-    }
     for (int j=0; j<maxMoves; j++) {
       int res;
       //ANONYMOUS::move_left(i, j, res);
@@ -47,11 +39,7 @@ void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
   }
   std::printf("move\n\n");
   for (int i=0; i<maxStates; i++) {
-    if (i < max_acc[k]) {
       std::printf("%d\n", i);
-    } else {
-      std::printf("%d\n", i);
-    }
     for (int j=0; j<maxMoves; j++) {
       int res;
       //ANONYMOUS::move_left(i, j, res);
@@ -67,11 +55,7 @@ void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
   }
   std::printf("move\n\n");
   for (int i=0; i<maxStates; i++) {
-    if (i < max_acc[k]) {
       std::printf("%d\n", i);
-    } else {
-      std::printf("%d\n", i);
-    }
     for (int j=0; j<maxMoves; j++) {
       int res;
       //ANONYMOUS::move_left(i, j, res);
