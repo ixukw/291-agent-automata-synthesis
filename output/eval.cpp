@@ -24,9 +24,10 @@ void enumerate_all(int maxStates, int maxMoves) {
   }
 }
 
-void trace_actions(int actions[], int t, int maxStates, int maxMoves, int init_states[4]) {
+void trace_actions(int actions[], int t, int maxStates, int maxMoves, int init_states[4], int max_acc[4]) {
   int move = actions[0];
-  std::printf("i: action: #, states: l r u d\n");
+  std::printf("t\t        #\t        l r u d \t      #\n");
+  std::printf("init\taction: -\tstates: %d %d %d %d \tnext: %d\n", init_states[0], init_states[1], init_states[2], init_states[3], actions[0]);
   int state[4];
   state[0] = init_states[0];
   state[1] = init_states[1];
@@ -54,99 +55,36 @@ void trace_actions(int actions[], int t, int maxStates, int maxMoves, int init_s
       state[3] = res;
     }catch(AssumptionFailedException& afe){ std::printf("failed move_down for action #%d %d\n", i, actions[i]); }
     
-    std::printf("%d: action: %d, states: %d %d %d %d\n", i, actions[i], state[0], state[1],state[2],state[3]);
+    std::printf("%d\taction: %d\tstates: %d %d %d %d \t", i, actions[i], state[0], state[1],state[2],state[3]);
+
+    int next;
+    for (int j=0; j<maxMoves; j++) {
+      if (state[j] <= max_acc[j]) {
+        next = j;
+        break;
+      }
+    }
+    std::printf("next: %d\n", next);
+    if (i < t-1 && next != actions[i+1]) {
+      std::printf("t=%d: next action %d did not match expected next action %d\n", next, i, actions[i]);
+      return;
+    }
   }
 }
-
-void check_traces(int actions[], int initial_action, int t, int maxStates, int maxMoves, int init_states[4], int max_acc[4]) {
-  int state[4] = {init_states[0], init_states[1],init_states[2],init_states[3]};
-  int action = initial_action;
-
-  std::printf("Checking traces...\n");
-  std::printf("i: action: #, states: l r u d\n");
-  std::printf("-: action: %d, states: %d %d %d %d\n", action, state[0], state[1], state[2], state[3]);
-
-  for (int i = 0; i < t; i++) {
-    int res[4] = {0};
-
-    try {
-      ANONYMOUS::move_left(state[0], action, res[0]);
-    } catch (AssumptionFailedException &afe) {
-      std::printf("failed move_left for action #%d %d\n", i, action);
-    }
-
-    try {
-      ANONYMOUS::move_right(state[1], action, res[1]);
-    } catch (AssumptionFailedException &afe) {
-      std::printf("failed move_right for action #%d %d\n", i, action);
-    }
-
-    try {
-      ANONYMOUS::move_up(state[2], action, res[2]);
-    } catch (AssumptionFailedException &afe) {
-      std::printf("failed move_up for action #%d %d\n", i, action);
-    }
-
-    try {
-      ANONYMOUS::move_down(state[3], action, res[3]);
-    } catch (AssumptionFailedException &afe) {
-      std::printf("failed move_down for action #%d %d\n", i, action);
-    }
-
-    // Verify if any function returns 0 and check the true action
-    int synthesized_action;
-    if (res[0] <= max_acc[0]) {
-      synthesized_action = 0;
-      if (actions[i] != 0)
-        std::printf("Error: Mismatch at step %d: move_left returned 0 but action was %d\n", i, actions[i]);
-    }
-    // if (res[1] == 0 && actions[i] != 1) {
-    if (res[1] <= max_acc[1]) {
-      synthesized_action = 1;
-      if (actions[i] != 1)
-        std::printf("Error: Mismatch at step %d: move_right returned 0 but action was %d\n", i, actions[i]);
-    }
-    if (res[2] <= max_acc[2]) {
-      synthesized_action = 2;
-      if (actions[i] != 2)
-        std::printf("Error: Mismatch at step %d: move_up returned 0 but action was %d\n", i, actions[i]);
-    }
-    if (res[3] <= max_acc[3]) {
-      synthesized_action = 3;
-      if (actions[i] != 3)
-        std::printf("Error: Mismatch at step %d: move_down returned 0 but action was %d\n", i, actions[i]);
-    }
-
-    if (synthesized_action != actions[i]) {
-      std::printf("Error: Mismatch at step %d: expected action %d but got %d\n", i, actions[i], synthesized_action);
-    }
-
-    state[0] = res[0];
-    state[1] = res[1];
-    state[2] = res[2];
-    state[3] = res[3];
-
-    action = actions[i];
-    std::printf("%d: action: %d, states: %d %d %d %d\n", i, action, state[0], state[1], state[2], state[3]);
-  }
-
-  std::printf("Trace verification complete.\n");
-}
-
 
 int main() {
   int maxStates = 10;
   int maxMoves = 4;
-
   int t = 80;
-  int actions[80] = {1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2};
-  int true_actions[8] = {0,1,2,3,0,3,2,3};
-  int init_states[4] = {0,0,5,0};
-  int max_acc[4] = {4,4,4,4};
-  int initial_action = 1;
+  int init_states[] = {0,0,5,0};
+  int max_acc[] = {4,4,4,4};
 
-  //trace_actions(actions, t, maxStates, maxMoves, init_states);
-  check_traces(true_actions, initial_action, t-1, maxStates, maxMoves, init_states, max_acc);
+  int train_actions[] = {1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2};
+  //trace_actions(train_actions, t, maxStates, maxMoves, init_states, max_acc);
+
+  int test_actions[] = {3,3,3,3,3};
+  trace_actions(test_actions, 5, maxStates, maxMoves, init_states, max_acc);
+
   // enumerate_all(maxStates, maxMoves);
   return 1;
 }
