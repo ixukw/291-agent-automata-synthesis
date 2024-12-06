@@ -32,7 +32,7 @@ def gen_transitions(maxState: int, possible_moves: list[str]):
 def gen_assert(possible_moves_vars, possible_moves):
     assert_statements = []
     for i, (a, action) in enumerate(zip(possible_moves_vars, possible_moves)):
-        assert_statements.append(f"(({a} >= 0 && {a} <= max_acc_{a}) && " + " && ".join([f"({a1} != 0 && {a1} > max_acc_{a})" for a1 in possible_moves_vars if a1 != a]) + ")")
+        assert_statements.append(f"(({a} <= max_acc_{a}) && " + " && ".join([f"({a1} > max_acc_{a1})" for a1 in possible_moves_vars if a1 != a]) + ")")
 
     return "assert " + " || ".join(assert_statements) + ";\n"
   
@@ -56,8 +56,8 @@ def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list
     main_code += "int next;\n"
     next_state_code = ""
     for i, a in enumerate(possible_moves_vars):
-      if i == 0: next_state_code += f"if ({a} >= 0 && {a} <= max_acc_{a}) {{\n\tnext = {i};\n"
-      else: next_state_code += f"}} else if ({a} >= 0 && {a} <= max_acc_{a}) {{\n\tnext = {i};\n"
+      if i == 0: next_state_code += f"if ({a} <= max_acc_{a}) {{\n\tnext = {i};\n"
+      else: next_state_code += f"}} else if ({a} <= max_acc_{a}) {{\n\tnext = {i};\n"
     next_state_code += f"}}"
     
     main_code += next_state_code
