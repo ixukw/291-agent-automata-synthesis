@@ -21,3 +21,6 @@ test:
 
 clean:
 	rm -rf ${output_folder}
+
+eval:
+	g++ ${output_folder}/${filename}.cpp ${output_folder}/${filename}.h ${output_folder}/eval.cpp

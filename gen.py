@@ -45,7 +45,7 @@ def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list
     # generate the initial state for each movement
     for i, a in enumerate(possible_moves_vars):
         main_code += f"int init_state_{a} = {0 if i == init_action else '??'};\n"
-        main_code += f"int max_acc_{a} = {0 if i == init_action else '??'};\n"
+        main_code += f"int max_acc_{a} = ??;\n"
 
     # assert statement
     for i, (a, action) in enumerate(zip(possible_moves_vars, possible_moves)):

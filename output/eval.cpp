@@ -24,10 +24,14 @@ void enumerate_all(int maxStates, int maxMoves) {
   }
 }
 
-void trace_actions(int actions[], int t, int maxStates, int maxMoves) {
+void trace_actions(int actions[], int t, int maxStates, int maxMoves, int init_states[4]) {
   int move = actions[0];
-  int state[4] = {1,0,1,1};
   std::printf("i: action: #, states: l r u d\n");
+  int state[4];
+  state[0] = init_states[0];
+  state[1] = init_states[1];
+  state[2] = init_states[2];
+  state[3] = init_states[3];
   for (int i=0; i<t; i++) {
     int res;
     try{
@@ -54,8 +58,8 @@ void trace_actions(int actions[], int t, int maxStates, int maxMoves) {
   }
 }
 
-void check_traces(int actions[], int initial_action, int t, int maxStates, int maxMoves) {
-  int state[4] = {1,0,1,1};
+void check_traces(int actions[], int initial_action, int t, int maxStates, int maxMoves, int init_states[4], int max_acc[4]) {
+  int state[4] = {init_states[0], init_states[1],init_states[2],init_states[3]};
   int action = initial_action;
 
   std::printf("Checking traces...\n");
@@ -91,23 +95,23 @@ void check_traces(int actions[], int initial_action, int t, int maxStates, int m
 
     // Verify if any function returns 0 and check the true action
     int synthesized_action;
-    if (res[0] == 0) {
+    if (res[0] <= max_acc[0]) {
       synthesized_action = 0;
       if (actions[i] != 0)
         std::printf("Error: Mismatch at step %d: move_left returned 0 but action was %d\n", i, actions[i]);
     }
     // if (res[1] == 0 && actions[i] != 1) {
-    if (res[1] == 0) {
+    if (res[1] <= max_acc[1]) {
       synthesized_action = 1;
       if (actions[i] != 1)
         std::printf("Error: Mismatch at step %d: move_right returned 0 but action was %d\n", i, actions[i]);
     }
-    if (res[2] == 0) {
+    if (res[2] <= max_acc[2]) {
       synthesized_action = 2;
       if (actions[i] != 2)
         std::printf("Error: Mismatch at step %d: move_up returned 0 but action was %d\n", i, actions[i]);
     }
-    if (res[3] == 0) {
+    if (res[3] <= max_acc[3]) {
       synthesized_action = 3;
       if (actions[i] != 3)
         std::printf("Error: Mismatch at step %d: move_down returned 0 but action was %d\n", i, actions[i]);
@@ -131,16 +135,18 @@ void check_traces(int actions[], int initial_action, int t, int maxStates, int m
 
 
 int main() {
-  int maxStates = 4;
+  int maxStates = 10;
   int maxMoves = 4;
 
-  int t = 9;
-  int actions[9] = {1,0,1,2,3,0,3,2,3};
+  int t = 80;
+  int actions[80] = {1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2};
   int true_actions[8] = {0,1,2,3,0,3,2,3};
+  int init_states[4] = {0,0,5,0};
+  int max_acc[4] = {4,4,4,4};
   int initial_action = 1;
 
-  // trace_actions(actions, t, maxStates, maxMoves);
-  check_traces(true_actions, initial_action, t-1, maxStates, maxMoves);
+  //trace_actions(actions, t, maxStates, maxMoves, init_states);
+  check_traces(true_actions, initial_action, t-1, maxStates, maxMoves, init_states, max_acc);
   // enumerate_all(maxStates, maxMoves);
   return 1;
 }
