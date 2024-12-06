@@ -5,22 +5,84 @@
 #include "vops.h"
 #include "test.h"
 
-void enumerate_all(int maxStates, int maxMoves) {
+void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
   for (int i=0; i<maxStates; i++) {
-    std::printf("%d\n", i);
+    if (i < max_acc[k]) {
+      std::printf("%d\n", i);
+    } else {
+      std::printf("%d\n", i);
+    }
     for (int j=0; j<maxMoves; j++) {
       int res;
       ANONYMOUS::move_left(i, j, res);
-      std::printf("%d -> %d\n", j, res);
+      //ANONYMOUS::move_right(i, j, res);
+      //ANONYMOUS::move_up(i, j, res);
+      //ANONYMOUS::move_down(i, j, res);
+      
+      if (res < maxStates) {
+        std::printf("%d -> %d\n", j, res);
+      }
 
-      /*ANONYMOUS::move_right(i, j, res);
-      std::printf("r: state %d, move %d -> %d\n", i,j,res);
+    }
+  }
+  std::printf("move\n\n");
+  for (int i=0; i<maxStates; i++) {
+    if (i < max_acc[k]) {
+      std::printf("%d\n", i);
+    } else {
+      std::printf("%d\n", i);
+    }
+    for (int j=0; j<maxMoves; j++) {
+      int res;
+      //ANONYMOUS::move_left(i, j, res);
+      ANONYMOUS::move_right(i, j, res);
+      //ANONYMOUS::move_up(i, j, res);
+      //ANONYMOUS::move_down(i, j, res);
+      
+      if (res < maxStates) {
+        std::printf("%d -> %d\n", j, res);
+      }
 
+    }
+  }
+  std::printf("move\n\n");
+  for (int i=0; i<maxStates; i++) {
+    if (i < max_acc[k]) {
+      std::printf("%d\n", i);
+    } else {
+      std::printf("%d\n", i);
+    }
+    for (int j=0; j<maxMoves; j++) {
+      int res;
+      //ANONYMOUS::move_left(i, j, res);
+      //ANONYMOUS::move_right(i, j, res);
       ANONYMOUS::move_up(i, j, res);
-      std::printf("u: state %d, move %d -> %d\n", i,j,res);
+      //ANONYMOUS::move_down(i, j, res);
+      
+      if (res < maxStates) {
+        std::printf("%d -> %d\n", j, res);
+      }
 
+    }
+  }
+  std::printf("move\n\n");
+  for (int i=0; i<maxStates; i++) {
+    if (i < max_acc[k]) {
+      std::printf("%d\n", i);
+    } else {
+      std::printf("%d\n", i);
+    }
+    for (int j=0; j<maxMoves; j++) {
+      int res;
+      //ANONYMOUS::move_left(i, j, res);
+      //ANONYMOUS::move_right(i, j, res);
+      //ANONYMOUS::move_up(i, j, res);
       ANONYMOUS::move_down(i, j, res);
-      std::printf("d: state %d, move %d -> %d\n\n", i,j,res);*/
+      
+      if (res < maxStates) {
+        std::printf("%d -> %d\n", j, res);
+      }
+
     }
   }
 }
@@ -138,6 +200,6 @@ int main() {
   //int test_actions[] = {3,3,3,3,3};
   //trace_actions(test_actions, 5, maxStates, maxMoves, init_states, max_acc);
 
-  enumerate_all(maxStates, maxMoves);
+  enumerate_all(maxStates, maxMoves, max_acc);
   return 1;
 }
