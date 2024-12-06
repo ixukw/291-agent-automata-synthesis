@@ -7,19 +7,20 @@
 
 void enumerate_all(int maxStates, int maxMoves) {
   for (int i=0; i<maxStates; i++) {
+    std::printf("%d\n", i);
     for (int j=0; j<maxMoves; j++) {
       int res;
       ANONYMOUS::move_left(i, j, res);
-      std::printf("l: state %d, move %d: next %d\n", i,j,res);
+      std::printf("%d -> %d\n", j, res);
 
-      ANONYMOUS::move_right(i, j, res);
-      std::printf("r: state %d, move %d: next %d\n", i,j,res);
+      /*ANONYMOUS::move_right(i, j, res);
+      std::printf("r: state %d, move %d -> %d\n", i,j,res);
 
       ANONYMOUS::move_up(i, j, res);
-      std::printf("u: state %d, move %d: next %d\n", i,j,res);
+      std::printf("u: state %d, move %d -> %d\n", i,j,res);
 
       ANONYMOUS::move_down(i, j, res);
-      std::printf("d: state %d, move %d: next %d\n", i,j,res);
+      std::printf("d: state %d, move %d -> %d\n\n", i,j,res);*/
     }
   }
 }
@@ -122,21 +123,21 @@ void gen_actions(int init_action, int t, int maxStates, int maxMoves, int cur_st
 int main() {
   int maxStates = 10;
   int maxMoves = 4;
-  int t = 80;
-  int init_states[] = {0,0,5,0};
-  int max_acc[] = {4,4,4,4};
+  int t = 24;
+  int init_states[] = {0,0,2,0};
+  int max_acc[] = {3,3,3,2};
 
-  int train_actions[] = {1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2};
+  /*int train_actions[] = {0, 3, 1, 1, 2, 2, 0, 0, 0, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 0, 0, 0, 0};
   int *cur_states = trace_actions(train_actions, t, maxStates, maxMoves, init_states, max_acc);
 
   int states[maxStates];
   for (int i=0; i<maxStates; i++) {
     states[i] = cur_states[i];
   }
-  gen_actions(1, 20, maxStates, maxMoves, states, max_acc);
+  gen_actions(0, 20, maxStates, maxMoves, states, max_acc);*/
   //int test_actions[] = {3,3,3,3,3};
   //trace_actions(test_actions, 5, maxStates, maxMoves, init_states, max_acc);
 
-  // enumerate_all(maxStates, maxMoves);
+  enumerate_all(maxStates, maxMoves);
   return 1;
 }
