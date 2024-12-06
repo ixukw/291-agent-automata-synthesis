@@ -6,6 +6,7 @@
 #include "test.h"
 
 void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
+  char* moves[] = {"left", "right", "up", "down"};
   for (int i=0; i<maxStates; i++) {
       std::printf("%d\n", i);
     for (int j=0; j<maxMoves; j++) {
@@ -16,7 +17,7 @@ void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
       //ANONYMOUS::move_down(i, j, res);
       
       if (res < maxStates) {
-        std::printf("%d -> %d\n", j, res);
+        std::printf("%s -> %d\n", moves[j], res);
       }
 
     }
@@ -32,7 +33,7 @@ void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
       //ANONYMOUS::move_down(i, j, res);
       
       if (res < maxStates) {
-        std::printf("%d -> %d\n", j, res);
+        std::printf("%s -> %d\n", moves[j], res);
       }
 
     }
@@ -48,7 +49,7 @@ void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
       //ANONYMOUS::move_down(i, j, res);
       
       if (res < maxStates) {
-        std::printf("%d -> %d\n", j, res);
+        std::printf("%s -> %d\n", moves[j], res);
       }
 
     }
@@ -64,7 +65,7 @@ void enumerate_all(int maxStates, int maxMoves, int max_acc[]) {
       ANONYMOUS::move_down(i, j, res);
       
       if (res < maxStates) {
-        std::printf("%d -> %d\n", j, res);
+        std::printf("%s -> %d\n", moves[j], res);
       }
 
     }
