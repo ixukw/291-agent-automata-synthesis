@@ -29,6 +29,13 @@ def gen_transitions(maxState: int, possible_moves: list[str]):
         res += gen_transitions_helper(move, maxState, possible_moves)
     return res
 
+def gen_assert(possible_moves_vars, possible_moves):
+    assert_statements = []
+    for i, (a, action) in enumerate(zip(possible_moves_vars, possible_moves)):
+        assert_statements.append(f"(({a} >= 0 && {a} <= max_acc_{a}) && " + " && ".join([f"({a1} != 0 && {a1} > max_acc_{a})" for a1 in possible_moves_vars if a1 != a]) + ")")
+
+    return "assert " + " || ".join(assert_statements) + ";\n"
+  
 def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list[str], possible_moves_vars: str):
     # main func declaration and initial states
     main_code = "harness void main() {\n"
@@ -37,23 +44,20 @@ def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list
     
     # generate the initial state for each movement
     for i, a in enumerate(possible_moves_vars):
-        main_code += f"int init_state_{a} = {0 if i == init_action else "??"};\n"
+        main_code += f"int init_state_{a} = {0 if i == init_action else '??'};\n"
+        main_code += f"int max_acc_{a} = {0 if i == init_action else '??'};\n"
 
     # assert statement
-    assert_statements = []
     for i, (a, action) in enumerate(zip(possible_moves_vars, possible_moves)):
         main_code += f"int {a} = {action}(init_state_{a}, init_action);\n"
-        assert_statements.append(f"({a} == 0 && " + " && ".join([f"{a1} != 0" for a1 in possible_moves_vars if a1 != a]) + ")")
-
-    assert_statements = "assert " + " || ".join(assert_statements) + ";\n"
-    main_code += assert_statements
+    main_code += gen_assert(possible_moves_vars, possible_moves)
 
     # if statement for next
     main_code += "int next;\n"
     next_state_code = ""
     for i, a in enumerate(possible_moves_vars):
-      if i == 0: next_state_code += f"if ({a} == 0) {{\n\tnext = {i};\n"
-      else: next_state_code += f"}} else if ({a} == 0) {{\n\tnext = {i};\n"
+      if i == 0: next_state_code += f"if ({a} >= 0 && {a} <= max_acc_{a}) {{\n\tnext = {i};\n"
+      else: next_state_code += f"}} else if ({a} >= 0 && {a} <= max_acc_{a}) {{\n\tnext = {i};\n"
     next_state_code += f"}}"
     
     main_code += next_state_code
@@ -65,7 +69,7 @@ def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list
     for a, action in zip(possible_moves_vars, possible_moves):
       main_code += f"\t{a} = {action}({a}, next);\n"
     
-    main_code += "\t" + assert_statements
+    main_code += "\t" + gen_assert(possible_moves_vars, possible_moves)
     main_code +="\t" + next_state_code.replace('\n','\n\t')
     main_code += "\n\tassert (next == true_actions[i]);\n}"
     return main_code.replace('\n','\n\t') + "\n}"
