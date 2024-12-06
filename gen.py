@@ -20,7 +20,7 @@ def gen_transitions_helper(movement: str, maxState: int, possible_moves):
         res += "\t\t} else { \n\t\t\tassert 0;\n\t\t}\n"
         
     res += "\t} else {\n\t\tassert 0;\n\t}\n"
-    res += "\tassert nextState < maxState;\n \treturn nextState;\n} \n\n"
+    res += "\tassert (nextState < maxState);\n \treturn nextState;\n} \n\n"
     return res
 
 def gen_transitions(maxState: int, possible_moves: list[str]):
@@ -37,7 +37,7 @@ def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list
     
     # generate the initial state for each movement
     for i, a in enumerate(possible_moves_vars):
-        main_code += f"int init_state_{a} = {0 if i == init_action else 1};\n"
+        main_code += f"int init_state_{a} = {0 if i == init_action else "??"};\n"
 
     # assert statement
     assert_statements = []

@@ -63,7 +63,7 @@ if __name__ == "__main__":
     grid_size = (10, 10)  # 10x10 grid
 
     # Input sequence of coordinates to visit
-    coordinates = [(0, 0), (0, 5), (5, 5), (5,0), (0,0)]
+    coordinates = [(0, 0), (0, 2), (2, 2), (2,0), (0,0)]
 
     # Generate the path and snapshots
-    generate_trace_with_path(grid_size, coordinates, "data/circle/snapshot")
+    generate_trace_with_path(grid_size, coordinates, "data/circle3/snapshot")
