@@ -24,7 +24,7 @@ void enumerate_all(int maxStates, int maxMoves) {
   }
 }
 
-void trace_actions(int actions[], int t, int maxStates, int maxMoves, int init_states[4], int max_acc[4]) {
+int* trace_actions(int actions[], int t, int maxStates, int maxMoves, int init_states[4], int max_acc[4]) {
   int move = actions[0];
   std::printf("t\t        #\t        l r u d \t      #\n");
   std::printf("init\taction: -\tstates: %d %d %d %d \tnext: %d\n", init_states[0], init_states[1], init_states[2], init_states[3], actions[0]);
@@ -67,9 +67,10 @@ void trace_actions(int actions[], int t, int maxStates, int maxMoves, int init_s
     std::printf("next: %d\n", next);
     if (i < t-1 && next != actions[i+1]) {
       std::printf("t=%d: next action %d did not match expected next action %d\n", next, i, actions[i]);
-      return;
+      return state;
     }
   }
+  return state;
 }
 
 void gen_actions(int init_action, int t, int maxStates, int maxMoves, int cur_states[], int max_acc[]) {
@@ -126,10 +127,13 @@ int main() {
   int max_acc[] = {4,4,4,4};
 
   int train_actions[] = {1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2,1,1,1,1,1,3,3,3,3,3,0,0,0,0,0,2,2,2,2,2};
-  trace_actions(train_actions, t, maxStates, maxMoves, init_states, max_acc);
+  int *cur_states = trace_actions(train_actions, t, maxStates, maxMoves, init_states, max_acc);
 
-  int cur_states[] = {8,0,8,6};
-  gen_actions(1, 20, maxStates, maxMoves, cur_states, max_acc);
+  int states[maxStates];
+  for (int i=0; i<maxStates; i++) {
+    states[i] = cur_states[i];
+  }
+  gen_actions(1, 20, maxStates, maxMoves, states, max_acc);
   //int test_actions[] = {3,3,3,3,3};
   //trace_actions(test_actions, 5, maxStates, maxMoves, init_states, max_acc);
 
