@@ -35,6 +35,13 @@ def gen_assert(possible_moves_vars, possible_moves):
         assert_statements.append(f"(({a} <= max_acc_{a}) && " + " && ".join([f"({a1} > max_acc_{a1})" for a1 in possible_moves_vars if a1 != a]) + ")")
 
     return "assert " + " || ".join(assert_statements) + ";\n"
+
+def gen_assert_init(possible_moves_vars, possible_moves):
+    assert_statements = []
+    for i, (a, action) in enumerate(zip(possible_moves_vars, possible_moves)):
+        assert_statements.append(f"((init_state_{a} <= max_acc_{a}) && " + " && ".join([f"(init_state_{a1} > max_acc_{a1})" for a1 in possible_moves_vars if a1 != a]) + ")")
+
+    return "assert " + " || ".join(assert_statements) + ";\n"
   
 def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list[str], possible_moves_vars: str):
     # main func declaration and initial states
@@ -44,8 +51,10 @@ def gen_main_fun(init_action: int, true_actions: list[int], possible_moves: list
     
     # generate the initial state for each movement
     for i, a in enumerate(possible_moves_vars):
-        main_code += f"int init_state_{a} = {0 if i == init_action else '??'};\n"
+        main_code += f"int init_state_{a} = ??;\n"
         main_code += f"int max_acc_{a} = ??;\n"
+
+    main_code += gen_assert_init(possible_moves_vars, possible_moves)
 
     # assert statement
     for i, (a, action) in enumerate(zip(possible_moves_vars, possible_moves)):

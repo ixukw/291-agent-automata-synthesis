@@ -171,7 +171,7 @@ int main() {
   int maxStates = 2;
   int maxMoves = 4;
   int t = 12;
-  int init_states[] = {0,0,1,1};
+  int init_states[] = {0,1,1,1};
   int max_acc[] = {0,0,0,0};
 
   int train_actions[] = {1,3,1,3,1,3};
@@ -182,8 +182,8 @@ int main() {
   //   states[i] = cur_states[i];
   // }
   // gen_actions(0, 20, maxStates, maxMoves, states, max_acc);
-  int test_actions[] = {1,3,1,3}; // 3,1,3,1,3};
-  // trace_actions(test_actions, 12, maxStates, maxMoves, init_states, max_acc);
+  int test_actions[] = {1,3,1,3,1,3,1,3,1,3};
+  trace_actions(test_actions, 12, maxStates, maxMoves, init_states, max_acc);
 
   enumerate_all(maxStates, maxMoves, max_acc);
   return 1;

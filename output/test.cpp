@@ -18,7 +18,7 @@ void _main() {
   int  l=0;
   l = l_s1;
   int  r_s3=0;
-  move_right(0, 1, r_s3);
+  move_right(1, 1, r_s3);
   int  r=0;
   r = r_s3;
   int  u_s5=0;
@@ -128,7 +128,7 @@ void move_right(int state, int move, int& _out) {
           _out = 0;
         } else {
           assert ((move) == (3));;
-          _out = 0;
+          _out = 1;
         }
       }
     }
@@ -138,7 +138,7 @@ void move_right(int state, int move, int& _out) {
       _out = 0;
     } else {
       if ((move) == (1)) {
-        _out = 0;
+        _out = 1;
       } else {
         if ((move) == (2)) {
           _out = 0;
@@ -169,7 +169,7 @@ void move_up(int state, int move, int& _out) {
       }
     }
   } else {
-    // assert ((state) == (1));;
+    assert ((state) == (1));;
     if ((move) == (0)) {
       _out = 0;
     } else {
@@ -194,7 +194,7 @@ void move_down(int state, int move, int& _out) {
       _out = 0;
     } else {
       if ((move) == (1)) {
-        _out = 1;
+        _out = 0;
       } else {
         if ((move) == (2)) {
           _out = 0;
