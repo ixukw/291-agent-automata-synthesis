@@ -114,7 +114,7 @@ int* trace_actions(int actions[], int t, int maxStates, int maxMoves, int init_s
     }
     std::printf("next: %d\n", next);
     if (i < t-1 && next != actions[i+1]) {
-      std::printf("t=%d: next action %d did not match expected next action %d\n", next, i, actions[i]);
+      std::printf("t=%d: next action %d did not match expected next action %d\n", next, i, actions[i+1]);
       return state;
     }
   }
@@ -168,22 +168,22 @@ void gen_actions(int init_action, int t, int maxStates, int maxMoves, int cur_st
 }
 
 int main() {
-  int maxStates = 10;
+  int maxStates = 2;
   int maxMoves = 4;
-  int t = 24;
-  int init_states[] = {0,0,2,0};
-  int max_acc[] = {3,3,3,2};
+  int t = 12;
+  int init_states[] = {0,1,1,1};
+  int max_acc[] = {0,0,0,0};
 
-  /*int train_actions[] = {0, 3, 1, 1, 2, 2, 0, 0, 0, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 0, 0, 0, 0};
+  int train_actions[] = {1,3,1,3,1,3};
   int *cur_states = trace_actions(train_actions, t, maxStates, maxMoves, init_states, max_acc);
 
-  int states[maxStates];
-  for (int i=0; i<maxStates; i++) {
-    states[i] = cur_states[i];
-  }
-  gen_actions(0, 20, maxStates, maxMoves, states, max_acc);*/
-  //int test_actions[] = {3,3,3,3,3};
-  //trace_actions(test_actions, 5, maxStates, maxMoves, init_states, max_acc);
+  // int states[maxStates];
+  // for (int i=0; i<maxStates; i++) {
+  //   states[i] = cur_states[i];
+  // }
+  // gen_actions(0, 20, maxStates, maxMoves, states, max_acc);
+  int test_actions[] = {1,3,1,3,1,3,1,3,1,3};
+  trace_actions(test_actions, 12, maxStates, maxMoves, init_states, max_acc);
 
   enumerate_all(maxStates, maxMoves, max_acc);
   return 1;

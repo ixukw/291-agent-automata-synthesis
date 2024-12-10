@@ -58,6 +58,6 @@ def process_snapshots(snapshot_folder):
 
 # Example Usage
 if __name__ == "__main__":
-    snapshot_folder = "data/circle/snapshot"  # Replace with your folder path
+    snapshot_folder = "data/stairs1/snapshot"  # Replace with your folder path
     actions = process_snapshots(snapshot_folder)
     print("Actions:", actions)
