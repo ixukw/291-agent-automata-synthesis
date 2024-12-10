@@ -94,6 +94,7 @@ def main():
     #print(args)
     if len(args) > 1:
         actions = from_snapshots(args[1])
+        # actions = [1,3,1,3,1,3]
         max_states = int(args[2])
 
     else:
